@@ -1,0 +1,79 @@
+[package]
+name = "servionx-browser"
+version = "1.0.0"
+description = "ServionX Browser - The Most Advanced and Secure Browser"
+authors = ["ServionX Team"]
+edition = "2021"
+license = "Proprietary"
+
+[lib]
+name = "servionx_browser_lib"
+crate-type = ["staticlib", "cdylib", "rlib"]
+
+[build-dependencies]
+tauri-build = { version = "2", features = [] }
+
+[dependencies]
+# Tauri Core
+tauri = { version = "2", features = ["tray-icon"] }
+tauri-plugin-opener = "2"
+tauri-plugin-shell = "2"
+tauri-plugin-fs = "2"
+tauri-plugin-dialog = "2"
+tauri-plugin-http = "2"
+tauri-plugin-process = "2"
+tauri-plugin-os = "2"
+tauri-plugin-clipboard-manager = "2"
+
+# Serialization
+serde = { version = "1", features = ["derive"] }
+serde_json = "1"
+
+# Async Runtime
+tokio = { version = "1", features = ["full"] }
+
+# Cryptography & Security
+argon2 = "0.5"
+aes-gcm = "0.10"
+rand = "0.8"
+uuid = { version = "1", features = ["v4"] }
+base64 = "0.22"
+sha2 = "0.10"
+
+# Networking
+reqwest = { version = "0.12", features = ["json", "rustls-tls", "stream"] }
+
+# Image Processing (for metadata stripping)
+image = "0.25"
+kamadak-exif = "0.6"
+
+# Fake Data Generation
+chrono = { version = "0.4", features = ["serde"] }
+
+# Logging
+log = "0.4"
+env_logger = "0.11"
+
+# Error handling
+thiserror = "2"
+anyhow = "1"
+
+# File system utilities
+dirs = "6"
+
+# Document processing (PDF/Office metadata stripping)
+regex = "1.10"
+zip = "2.1"
+
+# Lazy statics
+once_cell = "1.19"
+
+# Async streaming for downloads
+tokio-stream = "0.1"
+
+[profile.release]
+panic = "abort"
+codegen-units = 1
+lto = true
+opt-level = "z"
+strip = true
